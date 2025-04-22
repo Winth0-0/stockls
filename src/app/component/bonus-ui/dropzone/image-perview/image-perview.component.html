@@ -1,0 +1,11 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Image Preview </h4>
+    </div>
+    <div class="card-body ">
+        <div class="custom-dropzone customize-dropzone">
+             <dropzone class="show-preview" [config]="config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"
+             [message]="text"></dropzone>
+        </div>
+    </div>
+</div>

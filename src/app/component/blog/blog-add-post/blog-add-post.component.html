@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Post Edit</h4>
+                </div>
+                <div class="card-body custom-drop-post add-post ">
+                    <form class="row needs-validation" novalidate="">
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label for="validationCustom01">Title:</label>
+                                <input class="form-control" id="validationCustom01" type="text" placeholder="Post Title"
+                                    required="">
+                                <div class="valid-feedback">Looks good!</div>
+                            </div> 
+                            <div class="mb-3">
+                                <label>Type:</label>
+                                <div class="m-checkbox-inline">
+                                    <label for="edo-ani">
+                                        <input class="radio_animated" id="edo-ani" type="radio" name="rdo-ani"
+                                            checked="">Text
+                                    </label>
+                                    <label for="edo-ani1">
+                                        <input class="radio_animated" id="edo-ani1" type="radio" name="rdo-ani">Image
+                                    </label>
+                                    <label for="edo-ani2">
+                                        <input class="radio_animated" id="edo-ani2" type="radio" name="rdo-ani"
+                                            checked="">Audio
+                                    </label>
+                                    <label for="edo-ani3">
+                                        <input class="radio_animated" id="edo-ani3" type="radio" name="rdo-ani">Video
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-form-label">Category:
+                                    <div class="js-example-placeholder-multiple col-sm-12">
+                                        <ng-select [items]="cities2" bindLabel="name" bindValue="id" [multiple]="true"
+                                            placeholder="Select cities" [(ngModel)]="selectedCityIds" name="name">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="email-wrapper">
+                                <div class="theme-form">
+                                    <div class="mb-3">
+                                        <label class="w-100">Content:</label>
+                                        <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent" [ngModelOptions]="{standalone: true}"></angular-editor>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="dropzone custom-dropzone" id="singleFileUpload" action="/upload.php">
+                        <dropzone class="no-preview" [config]="config"
+                            [message]="'Drag your image here, or browser SVG,PNG,JPG or GIF'">
+                        </dropzone>
+                    </form>
+                    <div class="btn-showcase text-end">
+                        <button class="btn btn-primary" type="submit">Post</button>
+                        <input class="btn btn-light" type="reset" value="Discard">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

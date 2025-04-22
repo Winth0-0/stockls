@@ -1,0 +1,30 @@
+<div class="card height-equal">
+    <div class="card-header total-revenue">
+        <h3>Sales Chart </h3>
+        <div class="sales-chart-dropdown-select">
+            <div class="card-header-right-icon">
+                <div class="dropdown" (clickOutside)="clickOutside()">
+                    <button class="btn dropdown-toggle" (click)="open()">Last Year </button>
+                    <div class="dropdown-menu dropdown-menu-end" [class.show]="isOpen">
+                        <span class="dropdown-item">Last Month</span>
+                        <span class="dropdown-item">Last Week </span>
+                        <span class="dropdown-item">Today</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="sales-wrapper">
+            <div id="saleschart">
+                <apx-chart [series]="generalSalesChartData.series" [chart]="generalSalesChartData.chart"
+                    [stroke]="generalSalesChartData.stroke" [plotOptions]="generalSalesChartData.plotOptions"
+                    [dataLabels]="generalSalesChartData.dataLabels" [colors]="generalSalesChartData.colors"
+                    [legend]="generalSalesChartData.legend" [fill]="generalSalesChartData.fill"
+                    [grid]="generalSalesChartData.grid" [yaxis]="generalSalesChartData.yaxis"
+                    [xaxis]="generalSalesChartData.xaxis" [responsive]="generalSalesChartData.responsive"
+                    [tooltip]="generalSalesChartData.tooltip"></apx-chart>
+            </div>
+        </div>
+    </div>
+</div>

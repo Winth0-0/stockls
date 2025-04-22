@@ -1,0 +1,73 @@
+<div class="container-fluid mt-5">
+    <div class="edit-profile">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Create Promotion</h4>
+                        <div class="card-options">
+                            <a class="card-options-collapse" href="javascript:void(0)">
+                                <i class="fe fe-chevron-up"></i>
+                            </a>
+                            <a class="card-options-remove" href="javascript:void(0)">
+                                <i class="fe fe-x"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">ชื่อโปรโมชั่น</label>
+                            <input [(ngModel)]="formData.name" class="form-control" type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">เริ่มต้น</label>
+                            <input [(ngModel)]="formData.active" class="form-control" type="date">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">สิ้นสุด</label>
+                            <input [(ngModel)]="formData.expire" class="form-control" type="date">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ราคา</label>
+                            <input [(ngModel)]="formData.totalprice" class="form-control" type="number">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">สร้างโดย</label>
+                            <input class="form-control"
+                                placeholder="{{this.user?.fristname}} {{this.user?.lastname}}" [disabled]="true"
+                                type="text">
+                        </div>
+                        <div class="form-footer">
+                            <button [disabled]="user?.row != 'admin'" (click)="onSave()" class="btn btn-primary btn-block">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">เลือกสินค้าเข้าร่วมโปรโมชั่น</h4>
+                    </div>
+                    <div class="table-responsive add-project custom-scrollbar">
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>จำนวน</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of stockinfo">
+                                    <td><a class="text-inherit">{{item.goodname}}</a></td>
+                                    <input class="form-control" type="number" [(ngModel)]="item.amou"
+                                        name="amou_{{item.id}}">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

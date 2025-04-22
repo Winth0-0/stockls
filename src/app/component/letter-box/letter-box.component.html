@@ -1,0 +1,254 @@
+<div class="container-fluid">
+    <div class="edit-profile">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">สร้างคำสั่งซื้อ</h4>
+                        <div class="card-options">
+                            <a class="card-options-collapse" href="javascript:void(0)">
+                                <i class="fe fe-chevron-up"></i>
+                            </a>
+                            <a class="card-options-remove" href="javascript:void(0)">
+                                <i class="fe fe-x"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">สต็อค</label>
+                            <select class="form-control btn-square" [(ngModel)]="formData.stock">
+                                <option value="0">--Select--</option>
+                              <option value="stockonhand0">GorillaStock</option>
+                              <option value="stockonhand1">K'KitStock</option>
+                              <option value="stockonhand2">K'TorStock</option>
+                              <option value="stockonhand3">PR Stock</option>
+                              <option value="stockonhand4">Dealer Stock</option>
+                              <option value="stockonhand5">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" *ngIf="formData.stock == 'stockonhand4'">
+                            <label class="form-label">พนักงานขาย</label>
+                            <input [(ngModel)]="formData.salecode" class="form-control" placeholder=""  type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">สร้างโดย</label>
+                            <input [(ngModel)]="formData.usrid" class="form-control" placeholder="{{user?.fristname}} {{user?.lastname}}" [disabled]="true" type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">วันที่สั่งสินค้า</label>
+                            <input [(ngModel)]="formData.timecreate" class="form-control" type="date">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ชื่อ</label>
+                            <input [(ngModel)]="formData.nameaddr" class="form-control" placeholder=""  type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ที่อยู่</label>
+                            <input [(ngModel)]="formData.sendaddr" class="form-control" placeholder=""  type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">เบอร์โทร</label>
+                            <input [(ngModel)]="formData.phoneaddr" class="form-control" placeholder=""  type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">หมายเหตุ</label>
+                            <input [(ngModel)]="formData.remark" class="form-control" placeholder=""  type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">สาขา</label>
+                            <select [(ngModel)]="formData.branch" class="form-control btn-square">
+                                <option value="0">--Select--</option>
+                                <option value="facebook">FaceBook</option>
+                                <option value="tiktok">TikTok Shop</option>
+                                <option value="line">Line OA</option>
+                                <option value="shopee">Shopee</option>
+                                <option value="dealer">Dealer</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-footer mt-3">
+                            <button [disabled]="user?.row != 'admin'"  (click)="send()" class="btn btn-primary btn-block">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header card-no-border total-revenue">
+                                        <h4>ตะกร้าสินค้า</h4><button class="btn btn-primary"
+                                            (click)="pop()">เลือกสินค้า</button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="order-history table-responsive wishlist custom-scrollbar">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Prdouct Name</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>Action</th>
+                                                            <th>Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of formData.list">
+                                                            <td>
+                                                                <div class="product-name">
+                                                                    <a href="javascript:void(0)">
+                                                                        {{item.name}}
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{item.unitprice}}</td>
+                                                            <td>
+                                                                <fieldset class="qty-box">
+                                                                    <div class="input-group">
+                                                                        <button
+                                                                            class="btn btn-primary btn-square bootstrap-touchspin-down"
+                                                                            (click)="decrement(item.goodid)">
+                                                                            <i class="fa fa-minus"></i>
+                                                                        </button>
+                                                                        <input
+                                                                            class="touchspin text-center form-control"
+                                                                            type="text" [value]="item.amou" readonly>
+                                                                        <button
+                                                                            class="btn btn-primary btn-square bootstrap-touchspin-up"
+                                                                            (click)="increment(item.goodid)">
+                                                                            <i class="fa fa-plus"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </td>
+                                                            <td>
+                                                                <app-feathericon (click)="removeItem(item.goodid)" [icon]="'x-circle'" ></app-feathericon>
+                                                            </td>
+                                                            <td>{{item.unitprice * item.amou}}</td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td colspan="3">
+                                                                <div class="input-group">
+                                                                </div>
+                                                            </td>
+                                                            <td class="total-amount">
+                                                                <h3 class="m-0 text-end"><span class="f-w-600">Total
+                                                                        Price :</span></h3>
+                                                            </td>
+                                                            <td><span>{{ totalPrice.toFixed(2) }}</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #secondDialog let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">เลือกสินค้า</h4>
+    </div>
+    <div class="modal-body">
+        <div class="card">
+            <div class="card-header">
+                <h4>รายการสินค้า และ โปรโมชั่น</h4>
+                <p class="mt-1 f-m-light">เลือกสินค้าใช่ตะกร้าสินค้าและปรับจำนวนที่ต้องการหน้าตะกร้าสินค้า
+                </p>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="icon-tab" role="tablist" ngbNav #nav="ngbNav" [(activeId)]="active">
+                    <li class="nav-item" [ngbNavItem]="1">
+                        <a class="nav-link txt-secondary" id="icon-home-tab" ngbNavLink><i
+                                class="icofont icofont-ui-home"></i>รายการสินค้า</a>
+                        <ng-template ngbNavContent>
+                            <table class="table table-striped data-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total StockOnHand0</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of stockinfo">
+                                        <th scope="row">
+                                            {{item.id}}
+                                        </th>
+                                        <td>
+                                            {{item.goodname}}
+                                        </td>
+                                        <td>
+                                            {{item.unitprice| number: '1.2-2'}}
+                                        </td>
+                                        <td>
+                                            {{item.stockonhand0+item.stockonhand1+item.stockonhand2}}
+                                        </td>
+                                        <td>
+                                            <button [disabled]="item.stockonhand0 + item.stockonhand1 + item.stockonhand2 <= 0" class="btn btn-primary" (click)="addProduct(item)">Add</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ng-template>
+                    </li>
+                    <li class="nav-item" [ngbNavItem]="2">
+                        <a class="nav-link txt-secondary" id="profile-icon-tabs" ngbNavLink>
+                            <i class="icofont icofont-man-in-glasses"></i>โปรโมชั่น
+                        </a>
+                        <ng-template ngbNavContent>
+                            <table class="table table-striped data-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Promotion Name</th>
+                                        <th scope="col">Total Price</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of promotioninfo">
+                                        <th scope="row">
+                                            {{item.id}}
+                                        </th>
+                                        <td>
+                                            {{item.name}}
+                                        </td>
+                                        <td>
+                                            {{item.totalprice| number: '1.2-2'}}
+                                        </td>
+                                        <td>
+                                            <button (click)="addPromotion(item)" class="btn btn-primary">Add</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ng-template>
+                    </li>
+
+                </ul>
+                <div [ngbNavOutlet]="nav" class="mt-4"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark font-fam" (click)="c('Close click')">ปิด</button>
+    </div>
+</ng-template>

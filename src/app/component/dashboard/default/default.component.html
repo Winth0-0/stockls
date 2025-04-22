@@ -1,0 +1,71 @@
+<div class="container-fluid mt-5">
+    <div class="row size-column">
+        <div class="col-xl-12 col-md-12 box-col-12">
+            <app-revenue-growth></app-revenue-growth>
+        </div>
+        <div class="col-xxl-12 col-xl-12 box-col-12">
+            <div class="card">
+                <div class="table-responsive custom-scrollbar">
+                    <div class="card-body">
+                        
+                        <div class="card-header card-no-border total-revenue">
+                            <h4>Stock LifeShine</h4><a (click)="exportToExcel()">📤 ดาวน์โหลด Excel</a>
+                        </div>
+                        <table class="table table-striped data-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">GorillaStock</th>
+                                    <th scope="col">K'KitStock</th>
+                                    <th scope="col">K'TorStock</th>
+                                    <th scope="col">PR Stock</th>
+                                    <th scope="col">Dealer Stock</th>
+                                    <th scope="col">Other</th>
+                                    <th scope="col">Total StockOnHand0</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of stockinfo"> 
+                                    <th scope="row">{{data.id}}</th>
+                                    <td>
+                                        {{data.goodname}}
+                                    </td>
+                                    <td>
+                                        {{data.stockonhand0}}
+                                    </td>
+                                    <td>
+                                        {{data.stockonhand1}}
+                                    </td>
+                                    <td>
+                                        {{data.stockonhand2}}
+                                    </td>
+                                    <td>
+                                        {{data.stockonhand3}}
+                                    </td>
+                                    <td>
+                                        {{data.stockonhand4}}   
+                                    </td>
+                                    <td>
+                                        {{data.stockonhand5}}
+                                    </td>
+                                    <td>
+                                        {{data.stockonhand0 + data.stockonhand1 + data.stockonhand2}}
+                                    </td>
+                                </tr>
+                                <!--                                     
+                                    @if(!Data.length){
+                                    <tr class="odd">
+                                        <td colspan="8" class="dataTables_empty" style="text-align: center;">Opps! There
+                                            are no
+                                            result found.</td>
+                                    </tr>
+                                    } -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-xl-12 box-col-12">
+            <div class="card height-equal">
+                <div class="card-header total-revenue card-no-border">
+                  <h4>Latest Orders</h4>
+                  <div class="d-flex align-items-center gap-2"><a (click)="exportOrderTableToExcel()">📤 ดาวน์โหลด Excel</a>
+                  </div>
+                </div>
+                <div style="margin-left: 20px; margin-right: 20px;" class="list-product-header">
+                    <div>
+                        <div class="card card-body list-product-body">
+                            <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-2 g-3">
+                                <div class="col">
+                                    <label  class="form-label">เริ่มต้น</label>
+                                    <input [(ngModel)]="from" class="form-control" type="date">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">สิ้นสุด</label>
+                                    <input [(ngModel)]="to" class="form-control" type="date">
+                                </div>
+                                <div class="col">
+                                    <label style="color: white;" class="form-label">.</label>
+                                    <button (click)="Search()" class="form-control btn btn-primary btn-block">ค้นหา</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                  <div class="table-order table-responsive custom-scrollbar">
+                    <table class="table table-striped data-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">OrderNumb</th>
+                                <th scope="col">เวลาสร้าง</th>
+                                <th scope="col">ออร์เดอร์จาก</th>
+                                <th scope="col">ราคา</th>
+                                <th scope="col">หมายเหตุ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of OrderInfo; let i = index" (click)="pop(item)">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>
+                                    {{item.ordernumb}}
+                                </td>
+                                <td>
+                                    {{item.timecreate | date: 'dd/MM/yyyy(HH:mm)'}}
+                                </td>
+                                <td>
+                                    {{item.branch}}
+                                </td>
+                                <td>
+                                    {{item.totalprice}}
+                                </td>
+                                <td>
+                                    {{item.remark}}
+                                </td>
+                            </tr>
+                            <!--                                     
+                                @if(!Data.length){
+                                <tr class="odd">
+                                    <td colspan="8" class="dataTables_empty" style="text-align: center;">Opps! There
+                                        are no
+                                        result found.</td>
+                                </tr>
+                                } -->
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #secondDialog let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Order : {{order?.ordernumb}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="card">
+            <div class="card-header">
+                <p class="mt-1 f-m-light">วันที่สร้าง : {{order?.timecreate | date: 'dd/MM/yyyy(HH:mm)'}}</p>
+                <p class="mt-1 f-m-light">สั่งจาก : {{order?.branch}}</p>
+                <p class="mt-1 f-m-light">ราคา : {{order?.totalprice}}</p>
+                <p class="mt-1 f-m-light">ชื่อผู้สั่งซื้อ : {{order?.nameaddr}}</p>
+                <p class="mt-1 f-m-light">หมายเหตุ : {{order?.remark}}</p>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped data-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">สินค้า</th>
+                            <th scope="col">จำนวน</th>
+                            <th scope="col">ราคาต่อหน่วย</th>
+                            <th scope="col">ประเภท</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of OrderListItem; let i = index">
+                            <th scope="row">{{i + 1}}</th>
+                            <td>
+                                {{item.productname}}
+                            </td>
+                            <td>
+                                {{item.amou}}
+                            </td>
+                            <td>
+                                {{item.unitprice}}
+                            </td>
+                            <td>
+                                {{item.ispro == '1' ? 'โปรโมชั่น' : 'สินค้าปกติ'}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark font-fam" (click)="c('Close click')">ปิด</button>
+    </div>
+</ng-template>

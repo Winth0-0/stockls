@@ -1,0 +1,91 @@
+<div class="container-fluid mt-5">
+    <div class="edit-profile">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title mb-0">Tranfer Stock</h4>
+                      <div class="card-options">
+                        <a class="card-options-collapse" href="javascript:void(0)">
+                          <i class="fe fe-chevron-up"></i>
+                        </a>
+                         <a class="card-options-remove" href="javascript:void(0)">
+                          <i class="fe fe-x"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">ย้ายจากสต็อค</label>
+                            <select class="form-control btn-square"  [(ngModel)]="formData.fromstock" name="fromstock">
+                              <option value="0">--Select--</option>
+                              <option value="stockonhand0">GorillaStock</option>
+                              <option value="stockonhand1">K'KitStock</option>
+                              <option value="stockonhand2">K'TorStock</option>
+                              <option value="stockonhand3">PR Stock</option>
+                              <option value="stockonhand4">Dealer Stock</option>
+                              <option value="stockonhand5">Other</option>
+                              
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">ไปยังสต็อค</label>
+                            <select class="form-control btn-square" [(ngModel)]="formData.tostock" name="tostock">
+                              <option value="0">--Select--</option>
+                              <option value="stockonhand0">GorillaStock</option>
+                              <option value="stockonhand1">K'KitStock</option>
+                              <option value="stockonhand2">K'TorStock</option>
+                              <option value="stockonhand3">PR Stock</option>
+                              <option value="stockonhand4">Dealer Stock</option>
+                              <option value="stockonhand5">Other</option>
+                            </select>
+                          </div>
+                        <div class="mb-3">
+                          <label class="form-label">ย้ายโดย</label>
+                          <input [(ngModel)]="formData.usrid" class="form-control" placeholder="{{this.user?.fristname}} {{this.user?.lastname}}" [disabled]="true" type="text">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">หมายเหตุ</label>
+                          <input [(ngModel)]="formData.remark" class="form-control" placeholder="" type="text">
+                        </div>
+                        <div class="form-footer">
+                          <button [disabled]="user?.row != 'admin'" (click)="onSave()" class="btn btn-primary btn-block">Save</button>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title mb-0">เลือกสินค้าย้าย</h4>
+                    </div>
+                    <div class="table-responsive add-project custom-scrollbar">
+                      <table class="table card-table table-vcenter text-nowrap">
+                        <thead>
+                          <tr>
+                            <th>Product Name</th>
+                            <th>จำนวน</th>
+                            <th>จำนวนคลัง ({{ getStockName(formData.fromstock) }})</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of stockinfo">
+                            <td><a class="text-inherit">{{item.goodname}}</a></td>
+                            <input class="form-control" type="number" [(ngModel)]="item.amou" name="amou_{{item.id}}">  
+                            <td *ngIf="formData.fromstock == 'stockonhand0'"><a class="text-inherit">{{ item.stockonhand0}}</a></td>
+                            <td *ngIf="formData.fromstock == 'stockonhand1'"><a class="text-inherit">{{ item.stockonhand1}}</a></td>
+                            <td *ngIf="formData.fromstock == 'stockonhand2'"><a class="text-inherit">{{ item.stockonhand2}}</a></td>
+                            <td *ngIf="formData.fromstock == 'stockonhand3'"><a class="text-inherit">{{ item.stockonhand3}}</a></td>
+                            <td *ngIf="formData.fromstock == 'stockonhand4'"><a class="text-inherit">{{ item.stockonhand4}}</a></td>
+                            <td *ngIf="formData.fromstock == 'stockonhand5'"><a class="text-inherit">{{ item.stockonhand5}}</a></td>
+                        
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

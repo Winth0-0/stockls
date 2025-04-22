@@ -1,0 +1,6 @@
+<div class="mb-3">
+    <label>Upload project file</label>
+    <form class="dropzone custom-dropzone customize-dropzone">
+        <dropzone [config]="Config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"[message]="text"></dropzone>
+    </form> 
+</div>

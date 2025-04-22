@@ -1,0 +1,38 @@
+<div class="container-fluid p-0">
+    <div class="row m-0">
+        <div class="col-12 p-0">
+            <div class="login-card login-dark">
+                <div>
+                    <div class="login-main">
+                        <div class="theme-form">
+                            <h3>Sign in to account</h3>
+                            <p>Enter your username & password to login</p>
+                            <div class="form-group">
+                                <label class="col-form-label">Username</label>
+                                <input [(ngModel)]="usr" class="form-control" type="text" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Password</label>
+                                <div class="form-input position-relative">
+                                    <input [(ngModel)]="pass" class="form-control" [type]="show ? 'text' : 'password'"
+                                        type="password" name="login[password]" required="" placeholder="*********">
+                                    @if(!show){
+                                    <div class="show-hide" (click)="showPassword()"><span class="show"> </span></div>
+                                    }@else{
+                                    <div class="show-hide" (click)="showPassword()"><span class="Hide"></span></div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group mb-0">
+                                <div class="text-end mt-3">
+                                    <button class="btn btn-primary btn-block w-100" (click)="login()" type="submit">Sign
+                                        in</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
