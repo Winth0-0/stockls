@@ -83,7 +83,7 @@ export class FileManagerComponent {
                 });
                 this.router.navigate(['/dashboard/default']);
             } catch (error) {
-                console.error('API failed:', error);
+                console.error('API failed:', error); 
                 alert('API failed');
             }
         }
